@@ -75,15 +75,17 @@ class trivia extends Component {
       cats: [],
       isLoggedIn: false,
       superUser: "",
+      data: [],
     };
   }
 
   componentDidMount() {
-    const data = this.props.location.data;
+    const data = this.props.location.state;
+    console.log(JSON.stringify({ data }));
     if (data === undefined) {
       this.setState({ isLoggedIn: false });
     } else {
-      this.setState({ isLoggedIn: true, superUser: data.username });
+      this.setState({ isLoggedIn: true, superUser: data.data.username });
     }
     fetch(
       "https://opentdb.com/api.php?amount=15&category=30&type=multiple&encode=base64"
@@ -93,6 +95,7 @@ class trivia extends Component {
         this.setState({
           isLoaded: true,
           triviaData: json,
+          data: data,
         });
       });
   }
@@ -310,6 +313,7 @@ class trivia extends Component {
       categoryDisplay,
       isLoggedIn,
       superUser,
+      data,
     } = this.state;
 
     const question = this.displayTrivia();
@@ -473,7 +477,9 @@ class trivia extends Component {
     const superHeaderAuthentication = (
       <div id="Header">
         <button class="button button4">
-          <Link to="/Scores">View Your Scores</Link>
+          <Link to={{ pathname: "/Scores", state: { data } }}>
+            View Your Scores
+          </Link>
         </button>
 
         <button class="button button4" onClick={() => this.logOut()}>

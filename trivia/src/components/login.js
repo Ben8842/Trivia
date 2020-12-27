@@ -75,7 +75,7 @@ class logIn extends Component {
         <h4>You are Logged in as {username} ! </h4>
 
         <button class="button button1">
-          <Link to={{ pathname: "/trivia", data: data }}>
+          <Link to={{ pathname: "/trivia", state: { data: data } }}>
             Continue to Trivia Now!
           </Link>
         </button>
@@ -102,7 +102,8 @@ class logIn extends Component {
             <input
               id="tab"
               type="text"
-              name="password"git
+              name="password"
+              git
               placeholder="PASSWORD"
               type="text"
               value={this.state.password}
