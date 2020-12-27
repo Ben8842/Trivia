@@ -1,0 +1,40 @@
+{
+  "homepage": "https://goxr3plus.github.io/React-Router-V5-Tutorial/",
+  "name": "router-tutorials",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "mathjs": "^8.1.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "2.1.8",
+    "react-simple-chatbot": "^0.6.1",
+    "reactstrap": "^8.6.0",
+    "redux": "^4.0.5",
+    "styled-components": "^5.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "react-router": "^5.2.0",
+    "redux-devtools": "^3.7.0"
+  }
+}
