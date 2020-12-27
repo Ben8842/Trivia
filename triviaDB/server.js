@@ -15,8 +15,6 @@ app.use(express.json());
 
 app.use(cors(corsOptions));
 
-
-
 app.get("/users", (req, res) => {
   console.log("finding");
   user.find(
@@ -100,6 +98,52 @@ app.post("/authenticate", (req, res) => {
   );
 });
 app.get("/authenticate", (req, res) => {
+  console.log("finding");
+  user.find(
+    {
+      password: "coat",
+    },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        res.json(data);
+      }
+    }
+  );
+});
+
+app.post("/scores", (req, res) => {
+  console.log("posting");
+  console.log(req.body.email);
+  const body = req.body;
+  const userObject = new user(body);
+  user.findOne(
+    {
+      email: req.body.email,
+    },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send("Server Error during finding");
+      } else if (data == null) {
+        console.log("email does not exist" + data);
+        return res.status(400).send("user doesn't exist");
+      } else if (data != null) {
+        console.log("user found" + data);
+        if (req.body.password === data.password) {
+          data.set("password", null);
+
+          return res.status(200).json(data);
+        } else {
+          return res.status(400).send("password incorrect");
+        }
+      }
+    }
+  );
+});
+app.get("/scores", (req, res) => {
   console.log("finding");
   user.find(
     {
