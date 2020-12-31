@@ -2,6 +2,8 @@
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../actions/userActions.js";
 
 class logIn extends Component {
   constructor(props) {
@@ -52,11 +54,12 @@ class logIn extends Component {
           localStorage.setItem("user", JSON.stringify(data));
           console.log(data);
           // this.setState(data);
-          this.setState({
+          /*this.setState({
             loggedin: true,
             username: data.username,
             data: data,
-          });
+          });*/
+          this.props.login(data);
         }
       });
   }
@@ -68,14 +71,16 @@ class logIn extends Component {
   }
   git;
   render() {
-    var { loggedin, username, data } = this.state;
+    var { isLoggedIn, userName, data } = this.props.user;
+
+    console.log(this.props.user);
 
     const logger = (
       <div id="trivia">
-        <h4>You are Logged in as {username} ! </h4>
+        <h4>You are Logged in as {userName} ! </h4>
 
         <button class="button button1">
-          <Link to={{ pathname: "/trivia", state: { data: data } }}>
+          <Link to={{ pathname: "/trivia", state: { ...data } }}>
             Continue to Trivia Now!
           </Link>
         </button>
@@ -123,8 +128,12 @@ class logIn extends Component {
       </div>
     );
 
-    return <body>{loggedin ? logger : signFields}</body>;
+    return <body>{isLoggedIn ? logger : signFields}</body>;
   }
 }
 
-export default logIn;
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { login })(logIn);

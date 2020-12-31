@@ -24,9 +24,9 @@ class Scores extends Component {
     } else {
       this.setState({
         isLoggedIn: true,
-        superUser: superData.data.username,
+        superUser: superData.username,
         data: superData,
-        superScores: superData.data.data.scores,
+        superScores: superData.scores,
       });
     }
   }
@@ -52,16 +52,18 @@ class Scores extends Component {
         <p id="trivia">Hello {superUser}! </p>
         <p>See your scores below!</p>
         <ul>
-          {superScores.map((item, index) => (
-            <li key={index}>
-              {index + 1} | {item}
-            </li>
-          ))}
+          {superScores
+            ? superScores.map((item, index) => (
+                <li key={index}>
+                  {index + 1} | {item}
+                </li>
+              ))
+            : null}
         </ul>
         <p id="trivia">Thank you so much for playing</p>
 
         <button class="button button1">
-          <Link to={{ pathname: "/trivia", state: { data: data } }}>
+          <Link to={{ pathname: "/trivia", state: { ...data } }}>
             Continue to Trivia Now!
           </Link>
         </button>

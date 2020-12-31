@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../actions/userActions.js";
 
 var listCatsId = [
   9,
@@ -85,7 +87,7 @@ class trivia extends Component {
     if (data === undefined) {
       this.setState({ isLoggedIn: false });
     } else {
-      this.setState({ isLoggedIn: true, superUser: data.data.username });
+      this.setState({ isLoggedIn: true, superUser: data.username });
     }
     fetch(
       "https://opentdb.com/api.php?amount=15&category=30&type=multiple&encode=base64"
@@ -272,9 +274,7 @@ class trivia extends Component {
   }
 
   logOut() {
-    this.setState({
-      isLoggedIn: false,
-    });
+    this.props.logout();
   }
 
   handleCatChoice(ids) {
@@ -316,13 +316,15 @@ class trivia extends Component {
       data,
     } = this.state;
 
+    var { username, isLoggedIn, data } = this.props.user;
+
     const question = this.displayTrivia();
     const answer = this.displayTriviaA();
     const celebration = (
       <div id="correct">
         <p id="correct">You got this question number {count} correct! </p>
         <p>{question}</p>
-        <p id="correct">DANCE PARTY !</p>
+        <p id="correct">CORRECT !</p>
         <p>Continue to the next Question</p>
         <button class="button button3" onClick={() => this.nextTrivia()}>
           Next Question
@@ -477,7 +479,7 @@ class trivia extends Component {
     const superHeaderAuthentication = (
       <div id="Header">
         <button class="button button4">
-          <Link to={{ pathname: "/Scores", state: { data } }}>
+          <Link to={{ pathname: "/Scores", state: { ...data } }}>
             View Your Scores
           </Link>
         </button>
@@ -511,7 +513,11 @@ class trivia extends Component {
   }
 }
 
-export default trivia;
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { logout })(trivia);
 
 /*<ul>
             DATA HAS BEEN LOADED
