@@ -12,6 +12,7 @@ class Scores extends Component {
 
       data: [],
       superScores: [],
+      cats: [],
     };
   }
 
@@ -27,12 +28,13 @@ class Scores extends Component {
         superUser: superData.username,
         data: superData,
         superScores: superData.scores,
+        cats: superData.categories,
       });
     }
   }
 
   render() {
-    var { isLoggedIn, data, superUser, superScores } = this.state;
+    var { isLoggedIn, data, superUser, superScores, cats } = this.state;
     console.log("component mounted and " + isLoggedIn + data + superUser);
 
     const pleaseLogIn = (
@@ -55,7 +57,7 @@ class Scores extends Component {
           {superScores
             ? superScores.map((item, index) => (
                 <li key={index}>
-                  {index + 1} | {item}
+                  {index + 1} | {item} | {cats[index]}
                 </li>
               ))
             : null}

@@ -78,6 +78,7 @@ class trivia extends Component {
       isLoggedIn: false,
       superUser: "",
       data: [],
+      categoryName: "",
     };
   }
 
@@ -228,12 +229,12 @@ class trivia extends Component {
   }
 
   returnHome() {
-    var { superUser, correctCount } = this.state;
+    var { superUser, correctCount, categoryName } = this.state;
 
     console.log("HOME");
     console.log("adding SCORE");
 
-    console.log(JSON.stringify({ superUser, correctCount }));
+    console.log(JSON.stringify({ superUser, correctCount, categoryName }));
     fetch("http://localhost:5000/scores", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
@@ -244,7 +245,7 @@ class trivia extends Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify({ superUser, correctCount }),
+      body: JSON.stringify({ superUser, correctCount, categoryName }),
       // body data type must match "Content-Type" header
     })
       .then((res) => {
@@ -290,11 +291,10 @@ class trivia extends Component {
   }
 
   handleCatChoice(ids) {
-    this.setState({ isLoaded: false });
     var caty = listCatsId.indexOf(ids);
     var finalChoice = listCats[caty];
     console.log(finalChoice);
-
+    this.setState({ isLoaded: false, categoryName: finalChoice });
     fetch(
       "https://opentdb.com/api.php?amount=15&category=" +
         ids +

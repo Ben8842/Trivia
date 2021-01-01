@@ -44,6 +44,7 @@ app.post("/users", (req, res) => {
       if (error) {
         console.log(error);
         return res.status(500).send("Server Error during finding");
+      } else if ((data.passord = 6)) {
       } else if (data == null) {
         console.log("null!" + data);
         userObject.save(function (error) {
@@ -123,7 +124,12 @@ app.post("/scores", (req, res) => {
     {
       email: req.body.superUser,
     },
-    { $push: { scores: req.body.correctCount } },
+    {
+      $push: {
+        scores: req.body.correctCount,
+        categories: req.body.categoryName,
+      },
+    },
     (error, data) => {
       if (error) {
         console.log(error);
