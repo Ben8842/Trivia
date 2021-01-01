@@ -13,6 +13,7 @@ class signUp extends Component {
       username: "",
       password: "",
       loggedIn: false,
+      successfulSave: false,
     };
     this.handleChange = this.handleChange.bind(this);
 
@@ -55,6 +56,7 @@ class signUp extends Component {
         //if (typeof data === "object") {
         else {
           console.log("new user saved!");
+          this.setState({ successfulSave: true });
           //  this.closeModal();
         }
       });
@@ -67,6 +69,7 @@ class signUp extends Component {
   }
 
   render() {
+    var { successfulSave } = this.state;
     const signFields = (
       <div id="trivia">
         <form>
@@ -104,7 +107,11 @@ class signUp extends Component {
             />
           </div>
           <div>
-            <button class="button button1" onClick={() => this.submitSignUp()}>
+            <button
+              class="button button1"
+              type="button"
+              onClick={() => this.submitSignUp()}
+            >
               SUBMIT
             </button>
           </div>
@@ -112,7 +119,17 @@ class signUp extends Component {
       </div>
     );
 
-    return <div>{signFields}</div>;
+    const userSaved = (
+      <div id="trivia">
+        <h4>You have been saved to the system!</h4>
+        <h4>Please continue below to log in. </h4>
+        <button class="button button1">
+          <Link to="/login">Log In</Link>
+        </button>
+      </div>
+    );
+
+    return <div>{successfulSave ? userSaved : signFields}</div>;
   }
 }
 
