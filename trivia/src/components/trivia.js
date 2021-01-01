@@ -215,6 +215,18 @@ class trivia extends Component {
     }
   }
 
+  displayTriviaWrong() {
+    var { isLoaded, triviaData, count } = this.state;
+    if (isLoaded) {
+      var firstAnswer = atob(triviaData.results[count].correct_answer);
+
+      const cAnswers = <div>The Correct Answer was {firstAnswer}</div>;
+      return cAnswers;
+    } else {
+      console.log("waiting");
+    }
+  }
+
   returnHome() {
     var { superUser, correctCount } = this.state;
 
@@ -320,6 +332,7 @@ class trivia extends Component {
 
     const question = this.displayTrivia();
     const answer = this.displayTriviaA();
+    const answerWrong = this.displayTriviaWrong();
     const celebration = (
       <div id="correct">
         <p id="correct">You got this question number {count} correct! </p>
@@ -336,7 +349,7 @@ class trivia extends Component {
       <div id="wrong">
         <p id="wrong">You got this question number {count} Wrong! </p>
         <p>Don't give up yet. </p>
-        <p id="wrong">Continue to the next Question</p>
+        <p id="wrong">{answerWrong}</p>
         <button class="button button2" onClick={() => this.nextTrivia()}>
           Next Question
         </button>
