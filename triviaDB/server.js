@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(cors(corsOptions));
 
-app.get("/users", (req, res) => {
+/*app.get("/users", (req, res) => {
   console.log("finding");
   user.find(
     {
@@ -30,7 +30,7 @@ app.get("/users", (req, res) => {
       }
     }
   );
-});
+});*/
 app.post("/users", (req, res) => {
   console.log("posting");
   console.log(req.body.email);
@@ -44,7 +44,6 @@ app.post("/users", (req, res) => {
       if (error) {
         console.log(error);
         return res.status(500).send("Server Error during finding");
-      } else if ((data.passord = 6)) {
       } else if (data == null) {
         console.log("null!" + data);
         userObject.save(function (error) {

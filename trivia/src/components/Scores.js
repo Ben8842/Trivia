@@ -50,14 +50,14 @@ class Scores extends Component {
     );
 
     const triviaScores = (
-      <div id="trivia">
+      <div id="triviaScore">
         <p id="trivia">Hello {superUser}! </p>
         <p>See your scores below!</p>
-        <ul>
+        <ul id="triviaScore">
           {superScores
             ? superScores.map((item, index) => (
-                <li key={index}>
-                  {index + 1} | {item} | {cats[index]}
+                <li id="triviaScore" key={index}>
+                  #{index + 1} | Score: {item} | Category: {cats[index]}
                 </li>
               ))
             : null}

@@ -17,6 +17,18 @@
   font-weight: bold;
 }
 
+#triviaScore {
+  text-align: left;
+  color: darkgreen;
+
+  padding: 25px;
+  margin: 25px;
+  font-size: 30px;
+  background-color: yellow;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
 #tab {
   text-align: center;
   color: darkgreen;
