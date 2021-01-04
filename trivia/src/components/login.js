@@ -80,7 +80,7 @@ class logIn extends Component {
         <h4>You are Logged in as {userName} ! </h4>
 
         <button class="button button1">
-          <Link to={{ pathname: "/trivia", state: { ...data } }}>
+          <Link to={{ pathname: "/", state: { ...data } }}>
             Continue to Trivia Now!
           </Link>
         </button>

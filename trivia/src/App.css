@@ -1,3 +1,25 @@
+.column {
+  float: left;
+  position: relative;
+  left: 60px;
+}
+.left {
+  width: 10%;
+}
+.middle {
+  width: 30%;
+}
+
+.right {
+  width: 50%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 #Header {
   text-align: right;
   padding: 25px;
@@ -20,13 +42,14 @@
 #triviaScore {
   text-align: left;
   color: darkgreen;
-
+  align-items: center;
   padding: 25px;
   margin: 25px;
   font-size: 30px;
   background-color: yellow;
   border-radius: 50px;
   font-weight: bold;
+  text-align: center;
 }
 
 #tab {

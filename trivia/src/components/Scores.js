@@ -51,21 +51,42 @@ class Scores extends Component {
 
     const triviaScores = (
       <div id="triviaScore">
-        <p id="trivia">Hello {superUser}! </p>
-        <p>See your scores below!</p>
-        <ul id="triviaScore">
-          {superScores
-            ? superScores.map((item, index) => (
-                <li id="triviaScore" key={index}>
-                  #{index + 1} | Score: {item} | Category: {cats[index]}
-                </li>
-              ))
-            : null}
-        </ul>
+        <p id="trivia">
+          Hello {superUser}! Please view all of your scores below{" "}
+        </p>
+
+        <div class="row">
+          <div class="column left">
+            <h3>#</h3>
+          </div>
+          <div class="column middle">
+            <h3>Score</h3>
+          </div>
+          <div class="column right">
+            <h3>Category</h3>
+          </div>
+        </div>
+
+        {superScores
+          ? superScores.map((item, index) => (
+              <div class="row">
+                <div class="column left">
+                  <p>{index + 1}</p>
+                </div>
+                <div class="column middle">
+                  <p>{item}</p>
+                </div>
+                <div class="column right">
+                  <p>{cats[index]}</p>
+                </div>
+              </div>
+            ))
+          : null}
+
         <p id="trivia">Thank you so much for playing</p>
 
         <button class="button button1">
-          <Link to={{ pathname: "/trivia", state: { ...data } }}>
+          <Link to={{ pathname: "/", state: { ...data } }}>
             Continue to Trivia Now!
           </Link>
         </button>
